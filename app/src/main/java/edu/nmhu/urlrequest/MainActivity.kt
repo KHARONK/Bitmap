@@ -2,9 +2,11 @@ package edu.nmhu.urlrequest
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import org.json.JSONObject
@@ -15,7 +17,8 @@ import javax.net.ssl.HttpsURLConnection
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
-    private var API_KEY = "b1ae39383e93158e5261a2a8dd07a222"// Paste your api key here as a string instead of the R. stuff
+    private var API_KEY =
+        "b1ae39383e93158e5261a2a8dd07a222"// Paste your api key here as a string instead of the R. stuff
     private val service = "https://api.themoviedb.org/3/search/movie"
     private val imageBasePath = "https://image.tmdb.org/t/p/w500";
 
@@ -39,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             posterImage.setImageBitmap(loadBitmapData(fullPath))
         }
 
-        val editText = EditText(this).apply {
+        val editText1 = EditText(this).apply {
             hint = "Enter movie title"
         }
 
@@ -48,14 +51,19 @@ class MainActivity : AppCompatActivity() {
             hint = "Enter guess year"
         }
 
-        val submitButton = Button(this).apply{
-            text = "Submit"
-        }
-
+        val submitButton = Button(this)
+        submitButton.text = "Submit"
+        submitButton.setBackgroundColor(Color.RED)
+        submitButton.setOnClickListener(View.OnClickListener {
+            Log.d("MainActivity", "Submited")
+        })
 
             val relativeLayout = RelativeLayout(this).apply{
-            addView(editText)
-            addView(submitButton)
+
+                addView(editText1)
+                addView(editText)
+                addView(submitButton)
+
         }
         setContentView(relativeLayout)
 
